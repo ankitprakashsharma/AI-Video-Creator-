@@ -1,0 +1,28 @@
+# Virtual Environment
+venv/
+*.venv
+.venv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build and distribution
+/dist/
+/build/
+*.egg-info/
+
+# Wheel files
+*.whl
+
+# Environment files
+.env
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
