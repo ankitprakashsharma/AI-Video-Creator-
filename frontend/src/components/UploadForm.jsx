@@ -7,12 +7,18 @@ export default function UploadForm() {
   const [references, setReferences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) return alert("Upload a video");
+    if (!file) {
+      setError("Please upload a video file.");
+      return;
+    }
 
     setLoading(true);
+    setError(null);
+    setVideoUrl("");
     const formData = new FormData();
     formData.append("video", file);
     formData.append("prompt", prompt);
@@ -33,7 +39,7 @@ export default function UploadForm() {
       console.error(err);
       const detail =
         err?.response?.data?.detail || err?.message || "Unknown error";
-      alert(`Error processing video: ${detail}`);
+      setError(`Error processing video: ${detail}`);
     } finally {
       setLoading(false);
     }
@@ -81,11 +87,18 @@ export default function UploadForm() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 text-white px-4 py-2 rounded disabled:bg-gray-400"
+          disabled={loading}
         >
-          Process
+          {loading ? "Processing..." : "Process"}
         </button>
       </form>
+
+      {error && (
+        <div className="mt-4 text-.red-500">
+          <p>{error}</p>
+        </div>
+      )}
 
       {videoUrl && (
         <div className="mt-4">
