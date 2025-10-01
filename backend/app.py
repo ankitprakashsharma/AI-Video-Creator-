@@ -22,7 +22,7 @@ app = FastAPI()
 
 # CORS for local frontend
 # Get CORS origins from environment, default to local dev server
-cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5174").split(",")
+cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 
 app.add_middleware(
     CORSMiddleware,
